@@ -4,10 +4,11 @@ import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
 import Link from 'next/link';
 import Date from '../components/date';
+import { GetStaticProps } from 'next';
 
 // getStaticProps는 빌드 타임 때 데이터를 같이 보내줍니다. 빌드된 후에는 변경이 불가능합니다.
 // 무조건 server-side에서만 작동합니다.
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
 	const allPostsData = getSortedPostsData();
 	// 1. Props객체의 allPostsData를 리턴함으로써, 포스트들이 Home 컴포넌트의 props로 전해집니다.
 	return {
@@ -27,9 +28,17 @@ export async function getStaticProps() {
     }
   })
   */
-}
+};
 // 2. 이제 Home에서 접근이 가능합니다.
-export default function Home({ allPostsData }) {
+export default function Home({
+	allPostsData,
+}: {
+	allPostsData: {
+		date: string;
+		title: string;
+		id: string;
+	}[];
+}) {
 	return (
 		<Layout home>
 			<Head>

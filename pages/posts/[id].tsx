@@ -3,8 +3,17 @@ import Layout from '../../components/layout';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import Date from '../../components/date';
 import utilStyles from '../../styles/utils.module.css';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
-export default function Post({ postData }) {
+export default function Post({
+	postData,
+}: {
+	postData: {
+		title: string;
+		date: string;
+		contentHtml: string;
+	};
+}) {
 	return (
 		<Layout>
 			<Head>
@@ -21,7 +30,7 @@ export default function Post({ postData }) {
 	);
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	//  id값에 따라 페이지 지정을 해줍니다.
 	//  fallback으로 다른 라우트는 404가 뜨게 설정할 수 있습니다.
 	//  만약 true라면
@@ -34,9 +43,9 @@ export async function getStaticPaths() {
 		paths,
 		fallback: false,
 	};
-}
+};
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
 	//  id값에 따라 포스트데이터를 받아오고 props로 전해줍니다.
 	const postData = await getPostData(params.id);
 	return {
@@ -44,7 +53,7 @@ export async function getStaticProps({ params }) {
 			postData,
 		},
 	};
-}
+};
 
 /*
 * Page Path Depends on External Data (Dynamic Routes)

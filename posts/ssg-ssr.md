@@ -27,3 +27,5 @@ In that case, you can use **Server-Side Rendering**. It will be slower, but the 
 
 이럴 경우에는, **SSR** 방식을 사용할 수 있습니다. 느리지만 미리렌더된 페이지는 항상 최신화 되어있을 것입니다.
 아니면 프리렌더링을 스킵하고 CSR 방식을 취할 수 있습니다.
+
+그니까 요청 할 때마다 데이터 가져와야 되면 서버사이드 렌더링 쓰라고합디다.
